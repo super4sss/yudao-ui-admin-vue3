@@ -3,7 +3,9 @@ import request from '@/config/axios'
 export type TaskVO = {
   id: number
 }
-
+export type RollbackNodesVO = {
+  RollbackNodesMap: Map<String, Object>
+}
 export const getTodoTaskPage = async (params) => {
   return await request.get({ url: '/bpm/task/todo-page', params })
 }
@@ -23,10 +25,16 @@ export const approveTask = async (data) => {
 export const rejectTask = async (data) => {
   return await request.put({ url: '/bpm/task/reject', data })
 }
-export const backTask = async (data) => {
-  return await request.put({ url: '/bpm/task/back', data })
+export const rollback = async (data) => {
+  return await request.put({ url: '/bpm/task/rollback', data })
 }
-
+// export const getRollbackNodes = async (data) => {
+//   return await request.put({ url: '/bpm/task/rollbackNodes', data })
+// }
+// export const getRollbackNodes = async (data): Promise<RollbackNodesVO['RollbackNodesMap']> => {
+export const getRollbackNodes = async (data) => {
+  return await request.get({ url: 'bpm/task/rollbackNodes', data })
+}
 export const updateTaskAssignee = async (data) => {
   return await request.put({ url: '/bpm/task/update-assignee', data })
 }

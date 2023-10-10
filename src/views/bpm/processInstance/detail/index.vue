@@ -91,6 +91,8 @@
 
     <!-- 弹窗：转派审批人 -->
     <TaskUpdateAssigneeForm ref="taskUpdateAssigneeFormRef" @success="getDetail" />
+    <!-- 弹窗：退回 -->
+    <TaskRollback ref="taskRollbackRef" @success="getDetail" />
   </ContentWrap>
 </template>
 <script lang="ts" setup>
@@ -101,6 +103,7 @@ import * as DefinitionApi from '@/api/bpm/definition'
 import * as ProcessInstanceApi from '@/api/bpm/processInstance'
 import * as TaskApi from '@/api/bpm/task'
 import TaskUpdateAssigneeForm from './TaskUpdateAssigneeForm.vue'
+import TaskRollback from './TaskRollback.vue'
 import ProcessInstanceBpmnViewer from './ProcessInstanceBpmnViewer.vue'
 import ProcessInstanceTaskList from './ProcessInstanceTaskList.vue'
 import { registerComponent } from '@/utils/routerHelper'
@@ -173,9 +176,14 @@ const handleDelegate = async (task) => {
 }
 
 /** 处理审批退回的操作 */
-const handleBack = async (task) => {
-  message.error('暂不支持【退回】功能！')
-  console.log(task)
+// const handleBack = async (task) => {
+//   message.error('暂不支持【退回】功能！')
+//   console.log(task)
+// }
+/** 处理审批退回的操作 */
+const taskRollbackRef = ref()
+const handleBack = (id: string) => {
+  taskRollbackRef.value.open(id)
 }
 
 /** 获得详情 */

@@ -167,7 +167,8 @@ import { formatTime } from '@/utils'
 
 import { useUserStore } from '@/store/modules/user'
 import { useWatermark } from '@/hooks/web/useWatermark'
-import avatarImg from '@/assets/imgs/avatar.gif'
+// import avatarImg from '@/assets/imgs/avatar.gif'
+import avatarImg from '@/assets/imgs/logo.png'
 import type { WorkplaceTotal, Project, Notice, Shortcut } from './types'
 import { pieOptions, barOptions } from './echarts-data'
 
