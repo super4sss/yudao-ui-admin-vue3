@@ -104,7 +104,8 @@ export default {
   },
   login: {
     welcome: '欢迎使用本系统',
-    message: '开箱即用的中后台管理系统',
+    // message: '开箱即用的中后台管理系统',
+    message: '',
     tenantname: '租户名称',
     username: '用户名',
     password: '密码',
@@ -186,7 +187,7 @@ export default {
     happyDay: '祝你开心每一天!',
     toady: '今日晴',
     notice: '通知公告',
-    project: '项目数',
+    project: '待办任务',
     access: '项目访问',
     toDo: '待办',
     introduction: '一个正经的简介',

@@ -45,9 +45,14 @@ import * as FormApi from '@/api/bpm/form'
 import FcDesigner from '@form-create/designer'
 import { encodeConf, encodeFields, setConfAndFields } from '@/utils/formCreate'
 import { useTagsViewStore } from '@/store/modules/tagsView'
+import { nextTick } from 'vue'
+import { getAccessToken } from '@/utils/auth'
+import checkbox from '@/views/bpm/form/editor/select'
+import upload from '@/views/bpm/form/editor/upload'
+import { ApiAttrs } from '@form-create/element-ui/types/config'
 
 defineOptions({ name: 'BpmFormEditor' })
-
+const fApi = ref<ApiAttrs>() //
 const { t } = useI18n() // 国际化
 const message = useMessage() // 消息
 const { push, currentRoute } = useRouter() // 路由
@@ -85,6 +90,8 @@ const submitForm = async () => {
     const data = formData.value as FormApi.FormVO
     data.conf = encodeConf(designer) // 表单配置
     data.fields = encodeFields(designer) // 表单字段
+    console.log(data.fields)
+    // console.log(formCreate.toJson(designer.value.getRule()))
     if (!data.id) {
       await FormApi.createForm(data)
       message.success(t('common.createSuccess'))
@@ -103,9 +110,30 @@ const close = () => {
   delView(unref(currentRoute))
   push('/bpm/manager/form')
 }
-
+console.log('Bearer ' + getAccessToken())
+// formCreate.component('TestComponent', upload)
+// formCreate.maker.create('TestComponent', 'testField', '自定义组件').value('test')
+//自定义组件
+const setup = () => {
+  //插入组件规则
+  designer.value.addComponent(upload)
+  // designer.value.addComponent(checkbox)
+  //插入拖拽按钮到`main`分类下
+  designer.value.appendMenuItem('main', {
+    icon: upload.icon,
+    name: upload.name,
+    label: upload.label
+  })
+  // designer.value.appendMenuItem('main', {
+  //   icon: checkbox.icon,
+  //   name: checkbox.name,
+  //   label: checkbox.label
+  // })
+  // setup()
+}
 /** 初始化 **/
 onMounted(async () => {
+  // setup()
   // 场景一：新增表单
   const id = query.id as unknown as number
   if (!id) {
@@ -114,6 +142,20 @@ onMounted(async () => {
   // 场景二：修改表单
   const data = await FormApi.getForm(id)
   formData.value = data
+  console.log(data)
   setConfAndFields(designer, data.conf, data.fields)
+})
+nextTick(() => {
+  setup()
+}).then(() => {
+  // designer.value.options.beforeFetch = function () {
+  //   fApi.value?.fapi?.fields().forEach((item) => {
+  //     // console.log('Bearer ' + getAccessToken())
+  //     fApi.value?.fapi?.mergeRule(item, {
+  //       props: { headers: { Authorization: 'Bearer ' + getAccessToken() } },
+  //       effect: { fetch: { headers: { Authorization: 'Bearer ' + getAccessToken() } } }
+  //     })
+  //   })
+  // }
 })
 </script>

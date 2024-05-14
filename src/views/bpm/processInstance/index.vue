@@ -17,15 +17,15 @@
           class="!w-240px"
         />
       </el-form-item>
-      <el-form-item label="所属流程" prop="processDefinitionId">
-        <el-input
-          v-model="queryParams.processDefinitionId"
-          placeholder="请输入流程定义的编号"
-          clearable
-          @keyup.enter="handleQuery"
-          class="!w-240px"
-        />
-      </el-form-item>
+      <!--      <el-form-item label="所属流程" prop="processDefinitionId">-->
+      <!--        <el-input-->
+      <!--          v-model="queryParams.processDefinitionId"-->
+      <!--          placeholder="请输入流程定义的编号"-->
+      <!--          clearable-->
+      <!--          @keyup.enter="handleQuery"-->
+      <!--          class="!w-240px"-->
+      <!--        />-->
+      <!--      </el-form-item>-->
       <el-form-item label="流程分类" prop="category">
         <el-select
           v-model="queryParams.category"
@@ -90,7 +90,7 @@
   <!-- 列表 -->
   <ContentWrap>
     <el-table v-loading="loading" :data="list">
-      <el-table-column label="流程编号" align="center" prop="id" width="300px" />
+      <!--      <el-table-column label="流程编号" align="center" prop="id" width="300px" />-->
       <el-table-column label="流程名称" align="center" prop="name" />
       <el-table-column label="流程分类" align="center" prop="category">
         <template #default="scope">
@@ -138,15 +138,15 @@
           >
             详情
           </el-button>
-          <el-button
-            link
-            type="primary"
-            v-if="scope.row.result === 1"
-            v-hasPermi="['bpm:process-instance:query']"
-            @click="handleCancel(scope.row)"
-          >
-            取消
-          </el-button>
+          <!--          <el-button-->
+          <!--            link-->
+          <!--            type="primary"-->
+          <!--            v-if="scope.row.result === 1"-->
+          <!--            v-hasPermi="['bpm:process-instance:query']"-->
+          <!--            @click="handleCancel(scope.row)"-->
+          <!--          >-->
+          <!--            取消-->
+          <!--          </el-button>-->
         </template>
       </el-table-column>
     </el-table>

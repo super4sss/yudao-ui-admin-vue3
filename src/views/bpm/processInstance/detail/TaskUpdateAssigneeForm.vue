@@ -48,6 +48,7 @@ const open = async (id: string) => {
   dialogVisible.value = true
   resetForm()
   formData.value.id = id
+  console.log(formData.value)
   // 获得用户列表
   userList.value = await UserApi.getSimpleUserList()
 }

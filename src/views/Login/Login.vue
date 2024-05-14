@@ -36,7 +36,7 @@
             <img alt="" class="w-48px h-48px mr-10px" src="@/assets/imgs/logo.png" />
             <span class="text-20px font-bold">{{ underlineToHump(appStore.getTitle) }}</span>
           </div>
-          <div class="flex justify-end items-center space-x-10px">
+          <div class="flex justify-end items-center space-x-100px">
             <ThemeSwitch />
             <LocaleDropdown class="lt-xl:text-white dark:text-white" />
           </div>

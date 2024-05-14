@@ -1,10 +1,12 @@
 import request from '@/config/axios'
+import { getAccessToken } from '@/utils/auth'
 
 export type FormVO = {
   id: number
   name: string
   conf: string
   fields: string[]
+  // fields: string
   status: number
   remark: string
   createTime: string
@@ -52,5 +54,15 @@ export const getFormPage = async (params) => {
 export const getSimpleFormList = async () => {
   return await request.get({
     url: '/bpm/form/list-all-simple'
+  })
+}
+
+//上传文件
+export const upload = async (data) => {
+  return await request.post({
+    url:
+      import.meta.env.VITE_BASE_URL + import.meta.env.VITE_API_URL + '/bpm/process-instance/upload',
+    headers: { 'Content-type': 'multipart/form-data', Authorization: 'Bearer ' + getAccessToken() },
+    data: data
   })
 }

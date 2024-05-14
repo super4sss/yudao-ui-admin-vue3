@@ -5,13 +5,13 @@
         <el-row :gutter="20" justify="space-between">
           <el-col :xl="12" :lg="12" :md="12" :sm="24" :xs="24">
             <div class="flex items-center">
-              <img :src="avatar" alt="" class="w-70px h-70px rounded-[50%] mr-20px" />
+              <!--              <img :src="avatar" alt="" class="w-70px h-70px rounded-[50%] mr-20px" />-->
               <div>
                 <div class="text-20px">
                   {{ t('workplace.welcome') }} {{ username }} {{ t('workplace.happyDay') }}
                 </div>
                 <div class="mt-10px text-14px text-gray-500">
-                  {{ t('workplace.toady') }}，20℃ - 32℃！
+                  {{ t('workplace.toady') }}，22℃ - 32℃！
                 </div>
               </div>
             </div>
@@ -141,7 +141,7 @@
         <el-skeleton :loading="loading" animated>
           <div v-for="(item, index) in notice" :key="`dynamics-${index}`">
             <div class="flex items-center">
-              <img :src="avatar" alt="" class="w-35px h-35px rounded-[50%] mr-20px" />
+              <!--              <img :src="avatar" alt="" class="w-35px h-35px rounded-[50%] mr-20px" />-->
               <div>
                 <div class="text-14px">
                   <Highlight :keys="item.keys.map((v) => t(v))">

@@ -7,8 +7,8 @@
       :rules="formRules"
       label-width="110px"
     >
-      <el-form-item label="选择节点" prop="assigneeUserId">
-        <el-select v-model="formData.assigneeUserId" clearable style="width: 100%">
+      <el-form-item label="选择节点" prop="rollbackId">
+        <el-select v-model="formData.rollbackId" clearable style="width: 100%">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -32,26 +32,33 @@ defineOptions({ name: 'BpmTaskUpdateAssigneeForm' })
 
 const dialogVisible = ref(false) // 弹窗的是否展示
 const formLoading = ref(false) // 表单的加载中
-const formData = ref({
+const formData = reactive({
   id: '',
-  assigneeUserId: undefined
+  rollbackId: '',
+  formVariables: {}
 })
 const formRules = ref({
-  assigneeUserId: [{ required: true, message: '新审批人不能为空', trigger: 'change' }]
+  rollbackId: [{ required: true, message: '退回节点不能为空', trigger: 'change' }]
 })
 
 const formRef = ref() // 表单 Ref
 const options = ref<any[]>([]) // 用户列表
 
 /** 打开弹窗 */
-const open = async (id: string) => {
+const open = async (id: string, formVariables: object) => {
   dialogVisible.value = true
   resetForm()
-  formData.value.id = id
+  formData.id = id
+  console.log(formVariables)
+  console.log(id)
+  formData.formVariables = formVariables
+  // formData.rollbackId = 1
+  // const json = JSON.stringify(formData)
   // 获得用户列表
   // const data = formData.value as TaskApi.
-  const nodes = await TaskApi.getRollbackNodes(formData.value)
-  options.value = Object.keys(nodes['RollbackNodesMap']).map((key) => {
+  const nodes = await TaskApi.getRollbackNodes(formData)
+  console.log(nodes)
+  options.value = Object.keys(nodes).map((key) => {
     return {
       label: nodes[key],
       value: key
@@ -70,7 +77,7 @@ const submitForm = async () => {
   // 提交请求
   formLoading.value = true
   try {
-    await TaskApi.rollback(formData.value)
+    await TaskApi.rollback(formData)
     dialogVisible.value = false
     // 发送操作成功的事件
     emit('success')
@@ -81,10 +88,8 @@ const submitForm = async () => {
 
 /** 重置表单 */
 const resetForm = () => {
-  formData.value = {
-    id: '',
-    assigneeUserId: undefined
-  }
+  formData.id = ''
+  formData.rollbackId = ''
   formRef.value?.resetFields()
 }
 </script>

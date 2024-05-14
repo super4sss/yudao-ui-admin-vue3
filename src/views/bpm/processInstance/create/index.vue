@@ -53,6 +53,8 @@ import * as ProcessInstanceApi from '@/api/bpm/processInstance'
 import { setConfAndFields2 } from '@/utils/formCreate'
 import type { ApiAttrs } from '@form-create/element-ui/types/config'
 import ProcessInstanceBpmnViewer from '../detail/ProcessInstanceBpmnViewer.vue'
+// import { nextTick } from 'vue'
+// import formCreate from '@form-create/element-ui'
 
 defineOptions({ name: 'BpmProcessInstanceCreate' })
 
@@ -97,6 +99,18 @@ const handleSelect = async (row) => {
     setConfAndFields2(detailForm, row.formConf, row.formFields)
     // 加载流程图
     bpmnXML.value = await DefinitionApi.getProcessDefinitionBpmnXML(row.id)
+    //
+    console.log(selectProcessInstance.value.name)
+    // nextTick().then(() => {
+    if (
+      selectProcessInstance.value.name == '土地项目管理流程' ||
+      selectProcessInstance.value.name == '房产项目管理流程'
+    ) {
+      fApi.value?.hidden(true)
+    }
+
+    // })
+    console.log(detailForm.value.rule)
     // 情况二：业务表单
   } else if (row.formCustomCreatePath) {
     await router.push({
@@ -113,6 +127,9 @@ const submitForm = async (formData) => {
   }
   // 提交请求
   fApi.value.btn.loading(true)
+  // fApi.value.mergeRules({ Fpw060dwyo88l: { value: '111' } })
+  // formData.Fpw060dwyo88l = '111'
+  // console.log(formData)
   try {
     await ProcessInstanceApi.createProcessInstance({
       processDefinitionId: selectProcessInstance.value.id,

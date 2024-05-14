@@ -24,12 +24,12 @@
       </el-collapse-item>
       <el-collapse-item name="condition" v-if="formVisible" key="form">
         <template #title><Icon icon="ep:list" />表单</template>
-        <!-- <element-form :id="elementId" :type="elementType" /> -->
-        友情提示：使用
-        <router-link :to="{ path: '/bpm/manager/form' }"
-          ><el-link type="danger">流程表单</el-link>
-        </router-link>
-        替代，提供更好的表单设计功能
+        <element-form :id="elementId" :type="elementType" />
+        <!--        友情提示：使用-->
+        <!--        <router-link :to="{ path: '/bpm/manager/form' }"-->
+        <!--          ><el-link type="danger">流程表单</el-link>-->
+        <!--        </router-link>-->
+        <!--        替代，提供更好的表单设计功能-->
       </el-collapse-item>
       <el-collapse-item name="task" v-if="elementType.indexOf('Task') !== -1" key="task">
         <template #title><Icon icon="ep:checked" />任务</template>
@@ -71,7 +71,7 @@ import FlowCondition from './flow-condition/FlowCondition.vue'
 import SignalAndMassage from './signal-message/SignalAndMessage.vue'
 import ElementListeners from './listeners/ElementListeners.vue'
 import ElementProperties from './properties/ElementProperties.vue'
-// import ElementForm from './form/ElementForm.vue'
+import ElementForm from './form/ElementForm.vue'
 import UserTaskListeners from './listeners/UserTaskListeners.vue'
 
 defineOptions({ name: 'MyPropertiesPanel' })

@@ -44,7 +44,7 @@
   <!-- 列表 -->
   <ContentWrap>
     <el-table v-loading="loading" :data="list">
-      <el-table-column align="center" label="任务编号" prop="id" width="300px" />
+      <!--      <el-table-column align="center" label="任务编号" prop="id" width="300px" />-->
       <el-table-column align="center" label="任务名称" prop="name" />
       <el-table-column align="center" label="所属流程" prop="processInstance.name" />
       <el-table-column align="center" label="流程发起人" prop="processInstance.startUserNickname" />
